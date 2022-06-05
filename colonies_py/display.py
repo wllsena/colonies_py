@@ -65,7 +65,7 @@ def display(result: structure.result_worlds) -> None:
             f'Col: {col_num}. Foods: {amount_of_food}. Ants: {len(ant_results)}, Phes: {len(phe_results)}\n',
             col_num)
 
-        for phe_x, phe_y, phe_lifetime in phe_results:
+        for phe_num, phe_x, phe_y, phe_lifetime in phe_results:
             screen[:, phe_x, phe_y] = col_num, 4
 
         for ant_num, ant_x, ant_y, ant_old_x, ant_old_y, ant_has_food, ant_punc in ant_results:

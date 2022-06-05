@@ -8,10 +8,19 @@ from numpy.random import choice, normal, randint
 
 # -----
 
+# (num, x, y, amount, inside, limit)
 result_food = Tuple[int, int, int, float, int, int]
+
+# (num, x, y, old_x, old_y, has_food, punctuation)
 result_ant = Tuple[int, int, int, int, int, bool, int]
-result_pheromone = Tuple[int, int, int]
+
+# (num, x, y, lifetime)
+result_pheromone = Tuple[int, int, int, int]
+
+# (num, x, y, amount_of_food, ant_results, pheromone_results)
 result_colony = Tuple[int, int, int, int, List[result_ant], List[result_pheromone]]
+
+# (winner, x, y, food_results, colony_results)
 result_worlds = Tuple[int, int, int, List[result_food], List[result_colony]]
 
 
@@ -79,7 +88,7 @@ class Pheromone:
         if self.lifetime == 0:
             return None
 
-        result = (self.x, self.y, self.lifetime)
+        result = (self.num, self.x, self.y, self.lifetime)
 
         return result
 
