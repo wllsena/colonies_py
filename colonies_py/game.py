@@ -4,6 +4,7 @@ from time import sleep
 
 from display import display
 from structure import World
+from tasks import task_manager
 
 # -----
 
@@ -14,6 +15,7 @@ if __name__ == '__main__':
         result = world.update()
         display(result)
         sleep(0.5)
+        task_manager.delay(result)
 
         if result[0] != -1:
             break
