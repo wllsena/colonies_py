@@ -20,8 +20,8 @@ result_pheromone = Tuple[int, int, int, int]
 # (num, x, y, amount_of_food, ant_results, pheromone_results)
 result_colony = Tuple[int, int, int, int, List[result_ant], List[result_pheromone]]
 
-# (winner, x, y, food_results, colony_results)
-result_worlds = Tuple[int, int, int, List[result_food], List[result_colony]]
+# (step, winner, x, y, food_results, colony_results)
+result_worlds = Tuple[int, int, int, int, List[result_food], List[result_colony]]
 
 
 class Food:
@@ -360,7 +360,14 @@ class World:
         else:
             self.colonies: List[Colony] = colonies_
 
+        self.step = 0
+        self.winner = -1
+        self.result = (-1, -1, -1, -1, [], [])
+
     def update(self) -> result_worlds:
+        if self.winner != -1:
+            return self.result
+
         food_results = []
 
         for food in self.foods:
@@ -368,18 +375,19 @@ class World:
             food_results.append(result)
 
         colony_results = []
-        winner = -1
 
         for colony in self.colonies:
             result = colony.update(self.foods)
             colony_results.append(result)
 
             if result[3] >= self.food_goal:
-                winner = result[0]
+                self.winner = result[0]
 
-        result = (winner, self.x, self.y, food_results, colony_results)
+        self.step += 1
 
-        return result
+        self.result = (self.step, self.winner, self.x, self.y, food_results, colony_results)
+
+        return self.result
 
 
 # ----

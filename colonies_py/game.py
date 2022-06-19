@@ -15,7 +15,7 @@ if __name__ == '__main__':
         display(result)
         sleep(0.5)
 
-        if result[0] != -1:
+        if result[1] != -1:
             break
 
 # -----

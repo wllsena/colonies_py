@@ -53,7 +53,7 @@ def display_screen(X, Y, screen):
 def display(result: structure.result_worlds) -> None:
     os.system('clear')
 
-    winner, X, Y, food_results, colony_results = result
+    step, winner, X, Y, food_results, colony_results = result
 
     if winner != -1:
         print_color(f'WINNER: {winner}.\n')
